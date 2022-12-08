@@ -1,9 +1,14 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import Author from './_child/Author'
 
 export default function Section1() {
+    const bg = {
+        background: "url('/images/banner.png') no-repeat",
+        backgroundPosition: "right"
+    }
     return (
-        <section className="py-16">
+        <section className="py-16" style={bg}>
             <div className="container mx:auto md:px-20">
                 <h1 className="font-bold text-4xl pb-12 text-center">Trending</h1>
                 {
@@ -29,8 +34,8 @@ function Slide() {
                 <div className="title">
                     <Link legacyBehavior href={"/"}><a className="text-3xl md:text-6xl font-bold text-gray-800 hover:text-gray-600 text-justify">Your most unhappy customers are the best source of learning and improving!</a></Link>
                 </div>
-                <p className="text-gray-500 py-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga doloribus repellat eligendi, quibusdam aut inventore est at quo ad facere.</p>
-                <h1>author</h1>
+                <p className="text-gray-800 py-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga doloribus repellat eligendi, quibusdam aut inventore est at quo ad facere.</p>
+                <Author/>
             </div>
 
         </div>
