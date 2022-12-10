@@ -4,8 +4,16 @@ import Author from './_child/Author'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import SwiperCore, {Autoplay} from 'swiper'
+import Spinner from './_child/Spinner';
+import Error from './_child/Error';
+import fetcher from '../lib/fetcher'
 
 export default function Section1() {
+
+    const {data, isLoading, isError} = fetcher('api/trending')
+    if(isLoading) return <Spinner/>
+    if(isError) return <Error/>
+
     SwiperCore.use([Autoplay])
     const bg = {
         background: "url('/images/banner.png') no-repeat",
@@ -22,10 +30,13 @@ export default function Section1() {
       }}
       loop={true}
     >
+    {
+        data?.map((val, index) => <SwiperSlide key={index}><Slide data={val} /></SwiperSlide>)
+    }
+      {/* <SwiperSlide>{Slide()}</SwiperSlide>
       <SwiperSlide>{Slide()}</SwiperSlide>
       <SwiperSlide>{Slide()}</SwiperSlide>
-      <SwiperSlide>{Slide()}</SwiperSlide>
-      <SwiperSlide>{Slide()}</SwiperSlide>
+      <SwiperSlide>{Slide()}</SwiperSlide> */}
       
       ...
     </Swiper>
@@ -34,25 +45,27 @@ export default function Section1() {
     )
 }
 
-function Slide() {
+function Slide({data}) {
+    const { id, title, category, img, published, description ,author } = data;
+
     return (
-        <div className='grid md:grid-cols-2'>
-            <div className='image'>
-            <Link legacyBehavior href={"/"}><a><Image src={"/images/img1.jpg"} width={600} height={600} alt="" /></a></Link>
+        <div className="grid md:grid-cols-2">
+            <div className="image">
+                <Link legacyBehavior href={"/"}><a><Image src={img || "/"} width={600} height={600} alt="" /></a></Link>
             </div>
-
-            <div className='info flex justify-center flex-col'>
-                <div className="category">
-                    <Link legacyBehavior href={"/"}><a className="text-orange-600 hover:text-orange-800">Business, travel </a></Link>
-                    <Link legacyBehavior href={"/"}><a className="text-gray-800 hover:text-gray-600">- December 08</a></Link>
-                </div> 
-                <div className="title">
-                    <Link legacyBehavior href={"/"}><a className="text-3xl md:text-6xl font-bold text-gray-800 hover:text-gray-600 text-justify">Your most unhappy customers are the best source of learning and improving!</a></Link>
+            <div className="info flex justify-center flex-col">
+                <div className="cat">
+                    <Link legacyBehavior href={"/"}><a className="text-orange-600 hover:text-orange-800">{category || "Unknown"}</a></Link>
+                    <Link legacyBehavior href={"/"}><a className="text-gray-800 hover:text-gray-600">- {published || "Unknown"}</a></Link>
                 </div>
-                <p className="text-gray-800 py-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga doloribus repellat eligendi, quibusdam aut inventore est at quo ad facere.</p>
-                <Author/>
+                <div className="title">
+                    <Link legacyBehavior href={"/"}><a className="text-3xl md:text-6xl font-bold text-gray-800 hover:text-gray-600">{title || "Unknown"}</a></Link>
+                </div>
+                <p className="text-gray-500 py-3">
+                    {description || "description"}
+                </p>
+                { author ? <Author></Author> : <></>}
             </div>
-
         </div>
     )
 }

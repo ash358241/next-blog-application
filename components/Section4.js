@@ -1,8 +1,14 @@
 import Link from "next/link"
 import Image from "next/image"
 import Author from "./_child/Author"
+import fetcher from "../lib/fetcher"
+import Spinner from "./_child/Spinner"
+import Error from "./_child/Error"
 
 export default function Section4() {
+    const {data, isLoading, isError} = fetcher('api/popular')
+    if(isLoading) return <Spinner/>
+    if(isError) return <Error/>
   return (
     <section className="container mx-auto md:px-20 py-16">
     <div className="grid lg:grid-cols-2">
