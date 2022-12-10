@@ -1,8 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import Author from './_child/Author'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import SwiperCore, {Autoplay} from 'swiper'
 
 export default function Section1() {
+    SwiperCore.use([Autoplay])
     const bg = {
         background: "url('/images/banner.png') no-repeat",
         backgroundPosition: "right"
@@ -11,9 +15,20 @@ export default function Section1() {
         <section className="py-16" style={bg}>
             <div className="container mx:auto md:px-20">
                 <h1 className="font-bold text-4xl pb-12 text-center">Trending</h1>
-                {
-                    Slide()
-                }
+                <Swiper
+      slidesPerView={1}
+      autoplay={{
+        delay: 2000
+      }}
+      loop={true}
+    >
+      <SwiperSlide>{Slide()}</SwiperSlide>
+      <SwiperSlide>{Slide()}</SwiperSlide>
+      <SwiperSlide>{Slide()}</SwiperSlide>
+      <SwiperSlide>{Slide()}</SwiperSlide>
+      
+      ...
+    </Swiper>
             </div>
         </section>
     )
