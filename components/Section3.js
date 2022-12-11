@@ -2,12 +2,13 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import Link from "next/link"
 import Image from "next/image"
 import Author from "./_child/Author"
-import fetcher from "../lib/fetcher"
+import fetcher, { TryOut } from "../lib/fetcher"
 import Spinner from "./_child/Spinner"
 import Error from "./_child/Error"
 
 export default function Section3() {
-    const {data, isLoading, isError} = fetcher('api/popular')
+    // const {data, isLoading, isError} = fetcher('api/popular')
+    const {data, isLoading, isError} = TryOut('api/popular')
     if(isLoading) return <Spinner/>
     if(isError) return <Error/>
   return (
@@ -16,7 +17,12 @@ export default function Section3() {
 
     {/* swiper */}
     <Swiper
-            slidesPerView={2}
+            breakpoints={{
+                640 : {
+                    slidesPerView: 2,
+                    spaceBetween: 30
+                }
+            }}
         >
             {
                     data.map((value, index) => (

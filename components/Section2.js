@@ -5,9 +5,12 @@ import Author from "./_child/Author"
 import fetcher from '../lib/fetcher'
 import Spinner from "./_child/Spinner"
 import Error from "./_child/Error"
+import {TryOut} from '../lib/fetcher'
 
 export default function Section2() {
-    const {data, isLoading, isError} = fetcher('api/posts')
+    // const {data, isLoading, isError} = fetcher('api/posts')
+
+    const {data, isLoading, isError} = TryOut('api/posts')
 
     if(isLoading) return <Spinner/>
     if(isError) return <Error/>

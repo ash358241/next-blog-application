@@ -7,10 +7,15 @@ import SwiperCore, {Autoplay} from 'swiper'
 import Spinner from './_child/Spinner';
 import Error from './_child/Error';
 import fetcher from '../lib/fetcher'
+import {TryOut} from '../lib/fetcher'
+import { usePostData, useTrendingData } from '../src/hooks/useData';
 
 export default function Section1() {
 
-    const {data, isLoading, isError} = fetcher('api/trending')
+    // const {data, isLoading, isError} = fetcher('api/trending')
+    // const {data, isLoading, isError} = TryOut('api/trending')
+    const {data, isLoading, isError} = useTrendingData()
+    // console.log('🚀 Section1-18-> postData =>', postData);
     if(isLoading) return <Spinner/>
     if(isError) return <Error/>
 
@@ -46,15 +51,15 @@ function Slide({data}) {
     return (
         <div className="grid md:grid-cols-2">
             <div className="image">
-                <Link legacyBehavior href={"/"}><a><Image src={img || "/"} width={600} height={600} alt="" /></a></Link>
+                <Link legacyBehavior href={`/posts/${id}`}><a><Image src={img || "/"} width={600} height={600} alt="" /></a></Link>
             </div>
             <div className="info flex justify-center flex-col">
                 <div className="cat">
-                    <Link legacyBehavior href={"/"}><a className="text-orange-600 hover:text-orange-800">{category || "Unknown"}</a></Link>
-                    <Link legacyBehavior href={"/"}><a className="text-gray-800 hover:text-gray-600">- {published || "Unknown"}</a></Link>
+                    <Link legacyBehavior href={`/posts/${id}`}><a className="text-orange-600 hover:text-orange-800">{category || "Unknown"}</a></Link>
+                    <Link legacyBehavior href={`/posts/${id}`}><a className="text-gray-800 hover:text-gray-600">- {published || "Unknown"}</a></Link>
                 </div>
                 <div className="title">
-                    <Link legacyBehavior href={"/"}><a className="text-3xl md:text-6xl font-bold text-gray-800 hover:text-gray-600">{title || "Unknown"}</a></Link>
+                    <Link legacyBehavior href={`/posts/${id}`}><a className="text-3xl md:text-6xl font-bold text-gray-800 hover:text-gray-600">{title || "Unknown"}</a></Link>
                 </div>
                 <p className="text-gray-500 py-3">
                     {description || "description"}
