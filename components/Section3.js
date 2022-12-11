@@ -5,10 +5,12 @@ import Author from "./_child/Author"
 import fetcher, { TryOut } from "../lib/fetcher"
 import Spinner from "./_child/Spinner"
 import Error from "./_child/Error"
+import { usePopularData } from '../src/hooks/useData';
+
 
 export default function Section3() {
     // const {data, isLoading, isError} = fetcher('api/popular')
-    const {data, isLoading, isError} = TryOut('api/popular')
+    const {data, isLoading, isError} = usePopularData()
     if(isLoading) return <Spinner/>
     if(isError) return <Error/>
   return (

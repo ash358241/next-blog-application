@@ -8,7 +8,7 @@ import Spinner from './_child/Spinner';
 import Error from './_child/Error';
 import fetcher from '../lib/fetcher'
 import {TryOut} from '../lib/fetcher'
-import { usePostData, useTrendingData } from '../src/hooks/useData';
+import { useTrendingData } from '../src/hooks/useData';
 
 export default function Section1() {
 
