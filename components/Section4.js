@@ -26,7 +26,6 @@ export default function Section4() {
                     <h1 className="font-bold text-4xl py-12">Travel</h1>
                     <div className="flex flex-col gap-6">
                         {data[4] ? <Post data={data[4]}></Post> : <></>}
-                        {data[4] && <Post data={data[4]} />}
                         {data[5] && <Post data={data[5]}></Post>}
                         {data[2] && <Post data={data[2]}></Post>}
                     </div>
@@ -41,15 +40,15 @@ function Post({ data }) {
     return (
         <div className="flex gap-5">
             <div className="image flex flex-col justify-start">
-                <Link legacyBehavior href={"/"}><a><Image src={img || ""} className="rounded" width={450} height={450} alt="" /></a></Link>
+                <Link legacyBehavior href={`/posts/${id}`}><a><Image src={img || ""} className="rounded" width={450} height={450} alt="" /></a></Link>
             </div>
             <div className="info flex justify-center flex-col">
                 <div className="cat">
-                    <Link legacyBehavior href={"/"}><a className="text-orange-600 hover:text-orange-800">{category || "No Category"}</a></Link>
-                    <Link legacyBehavior href={"/"}><a className="text-gray-800 hover:text-gray-600">- {published || ""}</a></Link>
+                    <Link legacyBehavior href={`/posts/${id}`}><a className="text-orange-600 hover:text-orange-800">{category || "No Category"}</a></Link>
+                    <Link legacyBehavior href={`/posts/${id}`}><a className="text-gray-800 hover:text-gray-600">- {published || ""}</a></Link>
                 </div>
                 <div className="title">
-                    <Link legacyBehavior href={"/"}><a className="text-xl font-bold text-gray-800 hover:text-gray-600">{title || "No Title"}</a></Link>
+                    <Link legacyBehavior href={`/posts/${id}`}><a className="text-xl font-bold text-gray-800 hover:text-gray-600">{title || "No Title"}</a></Link>
                 </div>
                 {author ? <Author></Author> : <></>}
             </div>
