@@ -1,4 +1,4 @@
-import data from './data'
+import {data} from '../api/data'
 //api/popular
 export default function handler(req, res){
     const {Popular} = data;

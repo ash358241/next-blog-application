@@ -6,51 +6,51 @@ import Spinner from "./_child/Spinner"
 import Error from "./_child/Error"
 
 export default function Section4() {
-    const {data, isLoading, isError} = fetcher('api/popular')
-    if(isLoading) return <Spinner/>
-    if(isError) return <Error/>
-  return (
-    <section className="container mx-auto md:px-20 py-16">
-    <div className="grid lg:grid-cols-2">
-        <div className="item">
-            <h1 className="font-bold text-4xl py-12">Business</h1>
-            <div className="flex flex-col gap-6">
-                {/* posts */}
-                { Post() }
-                { Post() }
-                { Post() }
-                { Post() }
+    const { data, isLoading, isError } = fetcher('api/popular')
+    if (isLoading) return <Spinner />
+    if (isError) return <Error />
+    return (
+        <section className="container mx-auto md:px-20 py-16">
+            <div className="grid lg:grid-cols-2">
+                <div className="item">
+                    <h1 className="font-bold text-4xl py-12">Business</h1>
+                    <div className="flex flex-col gap-6">
+                        {/* posts */}
+                        {data[1] && <Post data={data[1]} />}
+                        {data[2] && <Post data={data[2]}></Post>}
+                        {data[3] && <Post data={data[3]}></Post>}
+                    </div>
+                </div>
+                <div className="item">
+                    <h1 className="font-bold text-4xl py-12">Travel</h1>
+                    <div className="flex flex-col gap-6">
+                        {data[4] ? <Post data={data[4]}></Post> : <></>}
+                        {data[4] && <Post data={data[4]} />}
+                        {data[5] && <Post data={data[5]}></Post>}
+                        {data[2] && <Post data={data[2]}></Post>}
+                    </div>
+                </div>
             </div>
-        </div>
-        <div className="item">
-            <h1 className="font-bold text-4xl py-12">Travel</h1>
-            <div className="flex flex-col gap-6">
-                { Post() }
-                { Post() }
-                { Post() }
-                { Post() }
-            </div>
-        </div>
-    </div>
-</section>
-  )
+        </section>
+    )
 }
 
-function Post(){
+function Post({ data }) {
+    const { id, title, category, img, published, author } = data;
     return (
         <div className="flex gap-5">
             <div className="image flex flex-col justify-start">
-                <Link legacyBehavior href={"/"}><a><Image src={"/images/img1.jpg"} className="rounded" width={300} height={250} alt="" /></a></Link>
+                <Link legacyBehavior href={"/"}><a><Image src={img || ""} className="rounded" width={450} height={450} alt="" /></a></Link>
             </div>
             <div className="info flex justify-center flex-col">
                 <div className="cat">
-                    <Link legacyBehavior href={"/"}><a className="text-orange-600 hover:text-orange-800">Business, Travel</a></Link>
-                    <Link legacyBehavior href={"/"}><a className="text-gray-800 hover:text-gray-600">- July 3, 2022</a></Link>
+                    <Link legacyBehavior href={"/"}><a className="text-orange-600 hover:text-orange-800">{category || "No Category"}</a></Link>
+                    <Link legacyBehavior href={"/"}><a className="text-gray-800 hover:text-gray-600">- {published || ""}</a></Link>
                 </div>
                 <div className="title">
-                    <Link legacyBehavior href={"/"}><a className="text-xl font-bold text-gray-800 hover:text-gray-600">Your most unhappy customers are your greatest source of learning</a></Link>
+                    <Link legacyBehavior href={"/"}><a className="text-xl font-bold text-gray-800 hover:text-gray-600">{title || "No Title"}</a></Link>
                 </div>
-                <Author></Author>
+                {author ? <Author></Author> : <></>}
             </div>
         </div>
     )

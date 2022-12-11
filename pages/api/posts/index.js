@@ -1,4 +1,4 @@
-import data from '../data'
+import {data} from '../../api/data'
 
 export default function handler(req, res){
     const {Posts} = data

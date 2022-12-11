@@ -33,11 +33,6 @@ export default function Section1() {
     {
         data?.map((val, index) => <SwiperSlide key={index}><Slide data={val} /></SwiperSlide>)
     }
-      {/* <SwiperSlide>{Slide()}</SwiperSlide>
-      <SwiperSlide>{Slide()}</SwiperSlide>
-      <SwiperSlide>{Slide()}</SwiperSlide>
-      <SwiperSlide>{Slide()}</SwiperSlide> */}
-      
       ...
     </Swiper>
             </div>

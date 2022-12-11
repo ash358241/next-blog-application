@@ -1,4 +1,4 @@
-import data from './data'
+import {data} from '../api/data'
 //api/trending
 export default function handler(req, res){
     const {Trending} = data;
